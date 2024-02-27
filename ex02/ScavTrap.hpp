@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "ScavTrap.hpp"
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
+#include "ClapTrap.hpp"
 
-int main( void )
+class ScavTrap: public ClapTrap
 {
-  ScavTrap  robot("Terminator");
-  ClapTrap  hero("Sarah Connor");
+	public:
+		ScavTrap(void);
+		ScavTrap(std::string name);
+		ScavTrap(std::string name, int hitPoints, int energyPoints, int attackDamage);
+		ScavTrap(ScavTrap const &src);
+		~ScavTrap(void);
 
-  std::cout << robot;
-  std::cout << hero;
+		ScavTrap & operator= (ScavTrap const &src);
 
-  hero.setHitPoints(150);
-  hero.setAttackDamage(40);
-  robot.attack("Sarah Connor");
-  hero.takeDamage(20);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
+		void attack(const std::string &target);
+		void guardGate(void);
+		bool getIsGuarding(void);
 
-  std::cout << robot;
-  std::cout << hero;
+	private:
+		bool	_isGuarding;		
+};
 
-  hero.beRepaired(2);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
-  robot.guardGate();
-  robot.attack("Sarah Connor");
+std::ostream & operator<<(std::ostream &o, ScavTrap &c);
 
-  std::cout << robot;
-  std::cout << hero;
-
-  return 0;
-}
+#endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "ScavTrap.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
+#include "ClapTrap.hpp"
 
-int main( void )
+class FragTrap: public ClapTrap
 {
-  ScavTrap  robot("Terminator");
-  ClapTrap  hero("Sarah Connor");
+	public:
+		FragTrap(void);
+		FragTrap(std::string name);
+		FragTrap(std::string name, int hitPoints, int energyPoints, int attackDamage);
+		FragTrap(FragTrap const &src);
+		~FragTrap(void);
 
-  std::cout << robot;
-  std::cout << hero;
+		FragTrap & operator= (FragTrap const &src);
 
-  hero.setHitPoints(150);
-  hero.setAttackDamage(40);
-  robot.attack("Sarah Connor");
-  hero.takeDamage(20);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
+		void attack(const std::string &target);
+		void highFivesGuys(void);
+};
 
-  std::cout << robot;
-  std::cout << hero;
+std::ostream & operator<<(std::ostream &o, FragTrap &c);
 
-  hero.beRepaired(2);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
-  hero.attack("Terminator");
-  robot.takeDamage(40);
-  robot.guardGate();
-  robot.attack("Sarah Connor");
-
-  std::cout << robot;
-  std::cout << hero;
-
-  return 0;
-}
+#endif

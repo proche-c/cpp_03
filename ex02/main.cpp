@@ -12,11 +12,13 @@
 
 #include <iostream>
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main( void )
 {
   ScavTrap  robot("Terminator");
   ClapTrap  hero("Sarah Connor");
+  FragTrap  robot2("Terminator2");
 
   std::cout << robot;
   std::cout << hero;
@@ -36,11 +38,16 @@ int main( void )
   robot.takeDamage(40);
   hero.attack("Terminator");
   robot.takeDamage(40);
-  robot.guardGate();
   robot.attack("Sarah Connor");
 
   std::cout << robot;
   std::cout << hero;
+
+  robot2.attack("Sarah Connor");
+  hero.takeDamage(30);
+  robot2.highFivesGuys();
+
+  std::cout << robot2;
 
   return 0;
 }
